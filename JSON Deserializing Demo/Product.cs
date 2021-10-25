@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace JSON_Deserializing_Demo
 {
+    /// <summary>
+    /// Root 
+    /// </summary>
     public class Product
     {
         public int ProductID { get; set; }

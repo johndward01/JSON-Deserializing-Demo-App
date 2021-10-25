@@ -14,16 +14,21 @@ namespace JSON_Deserializing_Demo
         static void Main(string[] args)
         {
             var client = new HttpClient();
-            var url = "https://localhost:5001/api/Product/8"; // Calls the GetProduct() method and passes in the id: 8
+            var url = "https://localhost:5001/api/Product"; // Calls the GetProduct() method and passes in the id: 8
+            var productJsonString = client.GetStringAsync(url).Result; 
+            var myProducts = JsonConvert.DeserializeObject<List<Product>>(productJsonString);
 
-            Product myProduct = JsonConvert.DeserializeObject<Product>(client.GetStringAsync(url).Result);
-
-            Console.WriteLine(myProduct.ProductID);
-            Console.WriteLine(myProduct.Name);
-            Console.WriteLine(myProduct.Price);
-            Console.WriteLine(myProduct.CategoryID);
-            Console.WriteLine(myProduct.OnSale);
-            Console.WriteLine(myProduct.StockLevel);
+            foreach (var item in myProducts)
+            {
+                Console.WriteLine(item.ProductID);
+                Console.WriteLine(item.Name);
+                Console.WriteLine(item.Price);
+                Console.WriteLine(item.CategoryID);
+                Console.WriteLine(item.OnSale);
+                Console.WriteLine(item.StockLevel);
+                Console.WriteLine();
+                Console.WriteLine();
+            }
         }
 
     }
